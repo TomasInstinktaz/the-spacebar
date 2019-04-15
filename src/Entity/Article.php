@@ -60,7 +60,8 @@ class Article
     private $imageFilename;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article", fetch="EXTRA_LAZY")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $comments;
 
@@ -177,6 +178,23 @@ class Article
     {
         return $this->comments;
     }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getNonDeletedComments(): Collection
+    {
+        $comments = [];
+
+        foreach ($this->getComments() as $comment) {
+            if (!$comment->getIsDeleted()) {
+                $comments[] = $comment;
+            }
+        }
+
+        return new ArrayCollection($comments);
+    }
+
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -186,6 +204,7 @@ class Article
 
         return $this;
     }
+
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {

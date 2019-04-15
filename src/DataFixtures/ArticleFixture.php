@@ -3,9 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class ArticleFixtures extends BaseFixture
+class ArticleFixture extends BaseFixture
 {
     private static $articleTitles = [
         'Why Asteroids Taste Like Bacon',
@@ -28,7 +29,6 @@ class ArticleFixtures extends BaseFixture
     {
         $this->createMany(Article::class, 10, function(Article $article, $count) use ($manager) {
             $article->setTitle($this->faker->randomElement(self::$articleTitles))
-//                ->setSlug($this->faker->slug)
                 ->setContent(<<<EOF
 Spicy **jalapeno bacon** ipsum dolor amet veniam shank in dolore. Ham hock nisi landjaeger cow,
 lorem proident [beef ribs](https://baconipsum.com/) aute enim veniam ut cillum pork chuck picanha. Dolore reprehenderit
@@ -58,21 +58,6 @@ EOF
                 ->setHeartCount($this->faker->numberBetween(5, 100))
                 ->setImageFilename($this->faker->randomElement(self::$articleImages))
             ;
-
-//            $comment1 = new Comment();
-//            $comment1->setAuthorName('Mike Ferengi');
-//            $comment1->setContent('I ate a normal rock once. It did NOT taste like bacon!');
-//            $comment1->setArticle($article);
-//            $manager->persist($comment1);
-//
-//            $comment2 = new Comment();
-//            $comment2->setAuthorName('Mike Ferengi');
-//            $comment2->setContent('Woohoo! I\'m going on an all-asteroid diet!');
-//            $comment2->setArticle($article);
-//            $manager->persist($comment2);
-
-//            $article->addComment($comment1);
-//            $article->addComment($comment2);
         });
 
         $manager->flush();
