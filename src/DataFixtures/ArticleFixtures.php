@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
-use App\Entity\Comment;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ArticleFixtures extends BaseFixture
@@ -60,17 +59,20 @@ EOF
                 ->setImageFilename($this->faker->randomElement(self::$articleImages))
             ;
 
-            $comment1 = new Comment();
-            $comment1->setAuthorName('Mike Ferengi');
-            $comment1->setContent('I ate a normal rock once. It did NOT taste like bacon!');
-            $comment1->setArticle($article);
-            $manager->persist($comment1);
+//            $comment1 = new Comment();
+//            $comment1->setAuthorName('Mike Ferengi');
+//            $comment1->setContent('I ate a normal rock once. It did NOT taste like bacon!');
+//            $comment1->setArticle($article);
+//            $manager->persist($comment1);
+//
+//            $comment2 = new Comment();
+//            $comment2->setAuthorName('Mike Ferengi');
+//            $comment2->setContent('Woohoo! I\'m going on an all-asteroid diet!');
+//            $comment2->setArticle($article);
+//            $manager->persist($comment2);
 
-            $comment2 = new Comment();
-            $comment2->setAuthorName('Mike Ferengi');
-            $comment2->setContent('Woohoo! I\'m going on an all-asteroid diet!');
-            $comment2->setArticle($article);
-            $manager->persist($comment2);
+//            $article->addComment($comment1);
+//            $article->addComment($comment2);
         });
 
         $manager->flush();
