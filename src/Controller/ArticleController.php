@@ -36,15 +36,17 @@ class ArticleController extends AbstractController
 //            $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
 //        }
 
-        $comments = [
-            'I ate a normal rock once. It did NOT taste like bacon!',
-            'Woohoo! I\'m going on an all-asteroid diet!',
-            'I like bacon too! Buy some from my site! bakinsomebacon.com',
-        ];
+//        $comments = $commentRepository->findBy(['article' => $article]);
+//        dump($comments);die;
+
+//        $comments = $article->getComments();
+//        foreach ($comments as $comment) {
+//            dump($comment);
+//        }
+//        die;
 
         return $this->render('article/show.html.twig', [
-            'article' => $article,
-            'comments' => $comments,
+            'article' => $article
         ]);
     }
 
