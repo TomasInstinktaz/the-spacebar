@@ -47,7 +47,8 @@ class Article
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -62,7 +63,7 @@ class Article
     private $imageFilename;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $comments;
@@ -131,12 +132,12 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
